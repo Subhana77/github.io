@@ -1,0 +1,25 @@
+{
+  "users" : [
+    {
+      "DisplayName" : "sara",
+      "EmailAddress" : "sara.sh@durhamcollege.ca",
+      "Username" : "shara",
+      "Password": "123456"
+    },
+
+    {
+      "DisplayName" : "Ami",
+      "EmailAddress" : "ami.gh@durhamcollege.ca",
+      "Username" : "Amigh",
+      "Password": "234689"
+    },
+
+    {
+      "DisplayName" : "samiv",
+      "EmailAddress" : "samiv.mh@durhamcollege.ca",
+      "Username" : "samivmh",
+      "Password": "78900"
+    }
+
+  ]
+}
