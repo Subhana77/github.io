@@ -12,18 +12,18 @@
  */
 
 async function DisplayTime() {
-    // Api key
+    // API key
     const apiKey = "8AMCCXP6UVMO";
     const zone = "America/Toronto";
 
-    // Construct the URL with the correct query parameters
-    const url = `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=zone&zone=${zone}`;
+    // Construct the URL with HTTPS
+    const url = `https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=zone&zone=${zone}`;
 
     try {
-        // fetch data from the API
+        // Fetch data from the API
         const response = await fetch(url);
 
-        // check if the response is successful
+        // Check if the response is successful
         if (!response.ok) {
             throw new Error("Failed to fetch timezone");
         }
@@ -32,10 +32,8 @@ async function DisplayTime() {
         const data = await response.json();
         console.log("Time zone data:", data);
 
-
         // Get the HTML element where time will be displayed
         const timeDataElement = document.getElementById("time-data");
-
 
         // Check if the API response is valid and update the page
         if (data.status === "OK" && data.formatted) {
@@ -44,7 +42,6 @@ async function DisplayTime() {
             timeDataElement.innerHTML = "Error fetching time data.";
         }
 
-    // update the page with error message
     } catch (error) {
         console.log("Error fetching timezone:", error);
         const timeDataElement = document.getElementById("time-data");
@@ -52,10 +49,11 @@ async function DisplayTime() {
     }
 }
 
-// call the function first and then update it in every 5 second.
+// Call the function first and then update it every 5 seconds
 DisplayTime().then(() => {
     setInterval(DisplayTime, 5000);
 });
+
 
 
 /**
