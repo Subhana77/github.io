@@ -1,25 +1,29 @@
 {
-  "users" : [
+  "users" :
+  [
     {
-      "DisplayName" : "sara",
-      "EmailAddress" : "sara.sh@durhamcollege.ca",
-      "Username" : "shara",
-      "Password": "123456"
+      "DisplayName" : "Bilbo Baggins",
+      "EmailAddress" : "bilbo@durhamcollege.ca",
+      "Username" : "bbaggins",
+      "Password" : "123456"
     },
-
     {
-      "DisplayName" : "Ami",
-      "EmailAddress" : "ami.gh@durhamcollege.ca",
-      "Username" : "Amigh",
-      "Password": "234689"
+      "DisplayName" : "Subhana Hashimi",
+      "EmailAddress" : "SubhanaHashimi@durhamcollege.ca",
+      "Username" : "sHashimi",
+      "Password" : "789012"
     },
-
     {
-      "DisplayName" : "samiv",
-      "EmailAddress" : "samiv.mh@durhamcollege.ca",
-      "Username" : "samivmh",
-      "Password": "78900"
+      "DisplayName" : "Manjot Kaur",
+      "EmailAddress" : "manjotk@durhamcollege.ca",
+      "Username" : "mKaur",
+      "Password" : "022006"
+    },
+    {
+      "DisplayName" : "admin",
+      "EmailAddress" : "admin@durhamcollege.ca",
+      "Username" : "admin",
+      "Password" : "password"
     }
-
   ]
 }

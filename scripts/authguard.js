@@ -2,7 +2,7 @@
 
 (function (){
     if(!sessionStorage.getItem("user")){
-        console.log("[AUTHGURAD] Unauthorized access detected. Redirecting to the login page");
+        console.log("[AUTHGUARD] Unauthorized access detected. Redirecting to login page");
         location.href = "login.html";
     }
 })();

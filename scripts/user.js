@@ -1,16 +1,19 @@
 "use strict";
 
-(function (core){
-
+// IIFE (Immediately Invoked Function Expression) to create a core object if not already defined
+(function (core) {
+    // User class definition
     class User {
-        constructor(displayName ="", emailAddress = "", username = "", password = "")
-        {
+        // Constructor initializes the user with default empty values for the properties
+        constructor(displayName = "", emailAddress = "",
+                    userName = "", password = "") {
             this._displayName = displayName;
             this._emailAddress = emailAddress;
-            this._username = username;
+            this._userName = userName;
             this._password = password;
         }
 
+        // Getter methods to access private properties
         get displayName() {
             return this._displayName;
         }
@@ -18,62 +21,65 @@
         get emailAddress() {
             return this._emailAddress;
         }
-        get username() {
-            return this._username;
+
+        get userName() {
+            return this._userName;
         }
 
+        // Setter methods to modify private properties
         set displayName(displayName) {
             this._displayName = displayName;
         }
 
-        set EmailAddress(emailAddress) {
+        set emailAddress(emailAddress) {
             this._emailAddress = emailAddress;
         }
 
-        set username(username) {
-            this._username = username;
+        set userName(userName) {
+            this._userName = userName;
         }
 
-        toString(){
+        // toString method to return a string representation of the user
+        toString() {
             return `Display Name: ${this._displayName}
-                    \nEmail Address: ${this._emailAddress}
-                    \nUserName: ${this._password};
-                    `
+            \nEmail Address: ${this._emailAddress}\nUsername: ${this._userName}`;
         }
 
-        toJSON(){
-            return{
+        // Convert the user object to JSON format
+        toJSON() {
+            return {
                 DisplayName: this._displayName,
                 EmailAddress: this._emailAddress,
-                Username: this._username,
+                UserName: this._userName,
                 Password: this._password
-            }
+            };
         }
 
-        fromJOSN(data){
-            this._displayName = data.displayName;
+        // Populate the user object from a JSON object
+        fromJSON(data) {
+            this._displayName = data.DisplayName;
             this._emailAddress = data.EmailAddress;
-            this._username = data.Username;
+            this._userName = data.UserName;
             this._password = data.Password;
         }
 
-        serialize(){
-            if(this._displayName !== "" && this._emailAddress !== "" && this._username !== ""){
-                return `${this._displayName}, ${this._emailAddress}, ${this._username}`
+        // Serialize user data into a string format (comma separated values)
+        serialize() {
+            if (this._displayName !== "" && this._emailAddress !== "" && this._userName !== "") {
+                return `${this._displayName}, ${this._emailAddress}, ${this._userName}`;
             }
             console.error("[ERROR] Failed to serialize. One or more user properties are missing");
-            return null;
         }
 
-        deserialize(data){
+        // Deserialize data from a string (expects CSV format)
+        deserialize(data) {
             let propertyArray = data.split(',');
             this._displayName = propertyArray[0];
             this._emailAddress = propertyArray[1];
-            this._username = propertyArray[2];
+            this._userName = propertyArray[2];
         }
     }
 
-
+    // Export User class to the core object
     core.User = User;
-}) (core || (core = {}));
-
+})(core || (core = {}));
