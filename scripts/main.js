@@ -60,11 +60,14 @@ DisplayTime().then(() => {
  * Fetches and display news.
  * @returns {Promise<void>}
  */
+/**
+ * Fetches and display news.
+ * @returns {Promise<void>}
+ */
 async function fetchNews() {
     // API keys
     const apiKey = "8d1a3740ffe3465c9fe352f15e78c2ad";  // Your API key
     const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
-
 
     try {
         // Fetch data from the API
@@ -72,7 +75,7 @@ async function fetchNews() {
 
         // Check if the response is successful
         if (!response.ok) {
-            throw new Error("Error fetching news data.");
+            throw new Error(`Error fetching news data. Status: ${response.status}`);
         }
 
         // Parse the response data as JSON
@@ -137,7 +140,7 @@ async function fetchNews() {
         // Handle any errors that occur during the fetch operation
         console.error("Error:", error);
         const newsDataElement = document.getElementById("news-data");
-        newsDataElement.innerHTML = "Failed to load news.";
+        newsDataElement.innerHTML = `Failed to load news. Error: ${error.message}`;
     }
 }
 
@@ -156,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error during initial fetch:", error);
     });
 });
+
 
 
 /**
