@@ -61,9 +61,9 @@ DisplayTime().then(() => {
  * @returns {Promise<void>}
  */
 async function fetchNews() {
-    // Your new API key
-    const apiKey = "ff92fe314dbdada4829c2914e429b256";  // Updated API key
-    const url = `https://gnews.io/api/v4/top-headlines?apikey=${apiKey}&lang=en&country=us&category=business`; // Updated API URL
+    // API keys
+    const apiKey = "8d1a3740ffe3465c9fe352f15e78c2ad";  // Your API key
+    const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
 
     try {
         // Fetch data from the API
@@ -87,7 +87,7 @@ async function fetchNews() {
         newsDataElement.innerHTML = '';
 
         // Check if the data contains articles
-        if (data.articles && data.articles.length > 0) {
+        if (data.status === "ok" && data.articles.length > 0) {
             // Limit to 3 or 4 articles (change the number to 4 if needed)
             const limitedArticles = data.articles.slice(0, 4); // Shows 4 articles
 
@@ -107,9 +107,9 @@ async function fetchNews() {
                 articleDescription.textContent = article.description;
 
                 // Add an image if it exists
-                if (article.image) {
+                if (article.urlToImage) {
                     const articleImage = document.createElement("img");
-                    articleImage.src = article.image;
+                    articleImage.src = article.urlToImage;
                     articleImage.alt = article.title;
                     articleElement.appendChild(articleImage);
                 }
@@ -155,6 +155,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error during initial fetch:", error);
     });
 });
+
+
+
+
 
 
 
