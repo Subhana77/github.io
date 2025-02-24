@@ -57,7 +57,7 @@ DisplayTime().then(() => {
 
 
 /**
- * Fetches and displays news.
+ * Fetches and display news.
  * @returns {Promise<void>}
  */
 async function fetchNews() {
@@ -155,6 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error during initial fetch:", error);
     });
 });
+
+
+
 
 
 
