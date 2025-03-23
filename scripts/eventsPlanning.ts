@@ -4,19 +4,19 @@
 Represent an event with a name, location, description, date, and time.
 */
 class EventsPlanning {
-    private _eventName: string;
-    private _description: string;
-    private _location: string;
-    private _eventDate: string;  // New property for date
-    private _eventTime: string;  // New property for time
+    private _eventName: string;     // to store the event name
+    private _description: string;  // to store the event description
+    private _location: string;    // to store the event location
+    private _eventDate: string;  // Property to store the event date
+    private _eventTime: string;  // Property to store the event time
 
     /**
      * Constructs a new event instance
-     * @param eventName
-     * @param location
-     * @param description
-     * @param eventDate
-     * @param eventTime
+     * @param eventName - Name of the event
+     * @param location - Location of the event
+     * @param description - Description of the event
+     * @param eventDate - Date of the event
+     * @param eventTime - Time of the event
      */
     constructor(eventName = "", location = "", description = "", eventDate = "", eventTime = "") {
         this._eventName = eventName;
@@ -28,16 +28,24 @@ class EventsPlanning {
 
     /**
      * Gets the event name
-     * @returns {string}
+     * @returns {string} - Event name
      */
     get eventName() {
         return this._eventName;
     }
 
+    /**
+     * Gets the event date
+     * @returns {string} - Event date
+     */
     get eventDate(): string {
         return this._eventDate;
     }
 
+    /**
+     * Sets the event date, ensures the date is non-empty
+     * @param eventDate - Event date
+     */
     set eventDate(eventDate: string) {
         if (!eventDate) {
             throw new Error("Invalid date: Must be a non-empty string");
@@ -45,17 +53,25 @@ class EventsPlanning {
         this._eventDate = eventDate;
     }
 
+    /**
+     * Gets the event time
+     * @returns {string} - Event time
+     */
     get eventTime() {
         return this._eventTime;
     }
 
+    /**
+     * Sets the event time
+     * @param eventTime - Event time
+     */
     set eventTime(eventTime: string) {
         this._eventTime = eventTime;
     }
 
     /**
      * Sets the event name. Validates input to ensure it's a non-empty string
-     * @param eventName
+     * @param eventName - Event name
      */
     set eventName(eventName: string) {
         if (eventName.trim() === "") {
@@ -66,7 +82,7 @@ class EventsPlanning {
 
     /**
      * Gets the event location
-     * @returns {string}
+     * @returns {string} - Event location
      */
     get location() {
         return this._location;
@@ -74,7 +90,7 @@ class EventsPlanning {
 
     /**
      * Sets the event location. Validates input to ensure it's a non-empty string
-     * @param location
+     * @param location - Event location
      */
     set location(location: string) {
         if (location.trim() === "") {
@@ -85,7 +101,7 @@ class EventsPlanning {
 
     /**
      * Gets the event description
-     * @returns {string}
+     * @returns {string} - Event description
      */
     get description(): string {
         return this._description;
@@ -93,7 +109,7 @@ class EventsPlanning {
 
     /**
      * Sets the event description. Validates input to ensure it's a non-empty string
-     * @param description
+     * @param description - Event description
      */
     set description(description: string) {
         if (description.trim() === "") {
@@ -112,7 +128,7 @@ class EventsPlanning {
 
     /**
      * Serializing the event details into a string format suitable for storage
-     * @returns {string|null}
+     * @returns {string|null} - JSON string of event details or null if validation fails
      */
     serialize() {
         if (!this._eventName || !this._location || !this._description || !this._eventDate || !this._eventTime) {
@@ -130,7 +146,7 @@ class EventsPlanning {
 
     /**
      * Deserialize the data and populate the event properties
-     * @param data
+     * @param data - JSON string to deserialize
      */
     deserialize(data: string) {
         try {

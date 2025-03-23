@@ -71,7 +71,7 @@ function handleEditClick(event, eventsPlanning, page) {
     const location = document.getElementById("location").value;
     const description = document.getElementById("description").value;
     const eventDate = document.getElementById("eventDate").value;
-    const eventTime = "12:00";
+    const eventTime = document.getElementById("eventTime").value;
     // Update the event details
     eventsPlanning.eventName = eventName;
     eventsPlanning.location = location;
@@ -98,7 +98,7 @@ function handleAddClick(event) {
     const location = document.getElementById("location").value;
     const description = document.getElementById("description").value;
     const eventDate = document.getElementById("eventDate").value;
-    const eventTime = "12:00"; // Fixed time value
+    const eventTime = document.getElementById("eventTime").value;
     // Create and save new event
     AddEvents(eventName, location, description, eventDate, eventTime);
     // redirect to events list
@@ -175,11 +175,11 @@ const VALIDATION_RULES = {
         errorMessage: "Event Name must be contain only letters and spaces"
     },
     location: {
-        regex: /^[A-Za-z\s]+$/,
+        regex: /^[A-Za-z\s.,!@-]+$/,
         errorMessage: "Location must be contain only letters and spaces"
     },
     description: {
-        regex: /^[A-Za-z\s]+$/,
+        regex: /^[A-Za-z\s.,!@-]+$/,
         errorMessage: "Description must be contain only letters and spaces"
     }
 };
@@ -239,10 +239,7 @@ function DisplayEditPage() {
         document.getElementById("description").value = eventsPlanning.description;
         // Set the event date and time from eventsPlanning object
         document.getElementById("eventDate").value = eventsPlanning.eventDate; // Set the event date
-        const [hours, minutes] = eventsPlanning.eventTime.split(":"); // Split time into hours and minutes
-        // Set the hour and minute fields separately
-        document.getElementById("eventHour").value = hours;
-        document.getElementById("eventMinute").value = minutes;
+        document.getElementById("eventTime").value = eventsPlanning.eventTime;
         if (editButton) {
             editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Edit`;
             editButton.classList.remove("btn-success");
@@ -362,13 +359,16 @@ function handleSendButtonClick(event) {
         const location = document.getElementById("location").value;
         const description = document.getElementById("description").value;
         const eventDate = document.getElementById("eventDate").value;
-        // Get the hour and minute values
-        const eventHour = document.getElementById("eventHour").value;
-        const eventMinute = document.getElementById("eventMinute").value;
-        // Ensure values are within valid ranges and format them
-        const formattedTime = `${eventHour.padStart(2, '0')}:${eventMinute.padStart(2, '0')}`;
+        // Get the event time in HH:MM format from the time input field
+        const eventTime = document.getElementById("eventTime").value;
+        // Ensure the event time is in a valid format (HH:MM)
+        const timeRegex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
+        if (!timeRegex.test(eventTime)) {
+            alert("Invalid event time format. Please enter time in HH:MM format.");
+            return;
+        }
         // Add the event with the captured values
-        AddEvents(eventName, location, description, eventDate, formattedTime);
+        AddEvents(eventName, location, description, eventDate, eventTime);
     }
     alert("Form submitted successfully");
 }

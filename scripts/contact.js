@@ -65,7 +65,7 @@ export class Contact {
     }
 }
 // Function to wait for the contact form and initialize it
-export function waitForContactForm(retries = 20) {
+function waitForContactForm(retries = 20) {
     console.log("Checking if contact form is available...");
     const form = document.querySelector('form');
     const successMessage = document.getElementById('success-message');

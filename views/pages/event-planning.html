@@ -1,18 +1,22 @@
 <h1 class="mb-5"> Plan an Event</h1>
 
+<!-- Event planning form -->
 <form class="col-lg-6 col-md-10 col-sm-12 mb-4">
+
+  <!-- Event Name Input -->
   <div class="input-group mb-3">
     <label for="eventName" class="input-group-text">Event Name: </label>
     <input id="eventName" name="eventName" type="text" class="form-control"
            aria-describedby="eventName-error" required>
-    <span id="eventName-error" class="text-danger"></span>
+    <span id="eventName-error" class="text-danger"></span> <!-- Error message for event name -->
   </div>
 
+  <!-- Location Input -->
   <div class="input-group mb-3">
     <label for="location" class="input-group-text">Location: </label>
     <input id="location" name="location" type="text" class="form-control"
            aria-describedby="location-error" required>
-    <span id="location-error" class="text-danger"></span>
+    <span id="location-error" class="text-danger"></span> <!-- Error message for location -->
   </div>
 
   <!-- Event Date Input -->
@@ -21,33 +25,39 @@
     <input id="eventDate" name="eventDate" type="date" class="form-control" required>
   </div>
 
-  <!-- Event Time Inputs (Fixed colon, hours and minutes) -->
+  <!-- Event Time Input (Hours and Minutes) -->
   <div class="input-group mb-3">
-    <label for="eventHour" class="input-group-text">Event Time: </label>
-    <!-- Event Hour -->
-    <input id="eventHour" name="eventHour" type="number" class="form-control" min="01" max="12" required>
-    <span>:</span>
-    <!-- Event Minute -->
-    <input id="eventMinute" name="eventMinute" type="number" class="form-control" min="00" max="59" required>
+    <label for="eventTime" class="input-group-text">Event Time: </label>
+    <input id="eventTime" name="eventTime" type="time" class="form-control" required>
   </div>
 
-
-
+  <!-- Event Description Input -->
   <div class="input-group mb-3">
     <label for="description" class="input-group-text">Description: </label>
     <input id="description" name="description" type="text" class="form-control"
            aria-describedby="description-error" required>
-    <span id="description-error" class="text-danger"></span>
+    <span id="description-error" class="text-danger"></span> <!-- Error message for description -->
   </div>
 
+  <!-- Checkbox for subscribing to the event list -->
   <div class="input-group mb-3">
     <input  id="subscribeCheckbox" name="subscribeCheckbox" type="checkbox"
             class="from-check-input me-2">
     <label class="form-check-label" for="subscribeCheckbox"> Subscribe to our event list</label>
   </div>
-  <button id="sendButton" type="submit" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Submit</button>
-  <button id="cancelButton" type="reset" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+
+  <!-- Submit and Cancel buttons -->
+  <button id="sendButton" type="submit" class="btn btn-primary">
+    <i class="fa-solid fa-envelope"></i> Submit
+  </button>
+  <button id="cancelButton" type="reset" class="btn btn-warning">
+    <i class="fa-solid fa-rotate-left"></i> Cancel
+  </button>
 </form>
+
+<!-- Button to show the events list -->
 <div class="col-lg-4 col-md-6">
-  <button id="showEventsList" class="btn btn-outline-primary mt-4"><i class="fa-solid fa-users"></i>Show Events List</button>
+  <button id="showEventsList" class="btn btn-outline-primary mt-4">
+    <i class="fa-solid fa-users"></i> Show Events List
+  </button>
 </div>

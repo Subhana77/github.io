@@ -93,7 +93,7 @@ function handleEditClick(event: Event, eventsPlanning: any, page: string) {
     const location = (document.getElementById("location") as HTMLInputElement).value;
     const description = (document.getElementById("description") as HTMLInputElement).value;
     const eventDate = (document.getElementById("eventDate") as HTMLInputElement).value;
-    const eventTime = "12:00";
+    const eventTime = (document.getElementById("eventTime") as HTMLInputElement).value;
 
     // Update the event details
     eventsPlanning.eventName = eventName;
@@ -102,19 +102,21 @@ function handleEditClick(event: Event, eventsPlanning: any, page: string) {
     eventsPlanning.eventDate = eventDate;
     eventsPlanning.eventTime = eventTime;
 
+    // Serialize the updated event and save it to localStorage
     localStorage.setItem(page, eventsPlanning.serialize());
 
-    // redirect
+    // redirect to the eventsList page
     router.navigate("/eventsList");
 }
 /**
- * Handles the process of adding a new contact
+ * Handles the process of adding a new event
  * @param event - the event object to prevent default form submission
  */
 function handleAddClick(event: Event) {
     // prevent form default form submission
     event.preventDefault();
 
+    // Validate the form before submitting
     if (!validateForm()) {
         alert("Form contains errors. Please correct them before submitting");
         return;
@@ -125,7 +127,7 @@ function handleAddClick(event: Event) {
     const location = (document.getElementById("location") as HTMLInputElement).value;
     const description = (document.getElementById("description") as HTMLInputElement).value;
     const eventDate = (document.getElementById("eventDate") as HTMLInputElement).value;
-    const eventTime = "12:00";  // Fixed time value
+    const eventTime = (document.getElementById("eventTime") as HTMLInputElement).value;
 
     // Create and save new event
     AddEvents(eventName, location, description, eventDate, eventTime);
@@ -224,15 +226,24 @@ const VALIDATION_RULES: {[key:string]: {regex:RegExp; errorMessage: string}} = {
     },
 
     location: {
-        regex: /^[A-Za-z\s]+$/,
+        regex: /^[A-Za-z\s.,!@-]+$/,
         errorMessage: "Location must be contain only letters and spaces"
     },
 
     description: {
-        regex: /^[A-Za-z\s]+$/,
+        regex: /^[A-Za-z\s.,!@-]+$/,
         errorMessage: "Description must be contain only letters and spaces"
     }
 };
+
+/**
+ * Function to add an event to the localStorage
+ * @param eventName - Name of the event
+ * @param location - Location of the event
+ * @param description - Description of the event
+ * @param eventDate - Date of the event
+ * @param eventTime - Time of the event
+ */
 
 function AddEvents(eventName: string, location: string, description: string, eventDate: string, eventTime: string) {
     console.log("[DEBUG] AddEvent() triggered...");
@@ -258,8 +269,6 @@ function AddEvents(eventName: string, location: string, description: string, eve
     // Redirect to events list page after successful submission
     router.navigate("/eventsList");
 }
-
-
 
 
 // Display the event editing page
@@ -304,11 +313,7 @@ function DisplayEditPage() {
 
 // Set the event date and time from eventsPlanning object
         (document.getElementById("eventDate") as HTMLInputElement).value = eventsPlanning.eventDate;  // Set the event date
-        const [hours, minutes] = eventsPlanning.eventTime.split(":");  // Split time into hours and minutes
-
-// Set the hour and minute fields separately
-        (document.getElementById("eventHour") as HTMLInputElement).value = hours;
-        (document.getElementById("eventMinute") as HTMLInputElement).value = minutes;
+        (document.getElementById("eventTime") as HTMLInputElement).value = eventsPlanning.eventTime;
 
 
         if (editButton) {
@@ -453,15 +458,18 @@ function handleSendButtonClick(event: Event) {
         const description = (document.getElementById("description") as HTMLInputElement).value;
         const eventDate = (document.getElementById("eventDate") as HTMLInputElement).value;
 
-        // Get the hour and minute values
-        const eventHour = (document.getElementById("eventHour") as HTMLInputElement).value;
-        const eventMinute = (document.getElementById("eventMinute") as HTMLInputElement).value;
+        // Get the event time in HH:MM format from the time input field
+        const eventTime = (document.getElementById("eventTime") as HTMLInputElement).value;
 
-        // Ensure values are within valid ranges and format them
-        const formattedTime = `${eventHour.padStart(2, '0')}:${eventMinute.padStart(2, '0')}`;
+        // Ensure the event time is in a valid format (HH:MM)
+        const timeRegex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
+        if (!timeRegex.test(eventTime)) {
+            alert("Invalid event time format. Please enter time in HH:MM format.");
+            return;
+        }
 
         // Add the event with the captured values
-        AddEvents(eventName, location, description, eventDate, formattedTime);
+        AddEvents(eventName, location, description, eventDate, eventTime);
     }
 
     alert("Form submitted successfully");
